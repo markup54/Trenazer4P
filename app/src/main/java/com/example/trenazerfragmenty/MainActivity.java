@@ -2,17 +2,23 @@ package com.example.trenazerfragmenty;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements WorkoutListFragment.Listener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        WorkoutDetailFragment frag = (WorkoutDetailFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.detail_frag);
-        frag.setWorkoutId(1);
-        //TODO zamienić id na wartość z listy treningów
+
+    }
+
+    @Override
+    public void itemClicked(long id) {
+        Intent intent = new Intent(MainActivity.this,
+                DetailActivity.class);
+        intent.putExtra(DetailActivity.EXTRA_WORKOUT_ID, (int)id);
+        startActivity(intent);
     }
 }
